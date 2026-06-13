@@ -30,8 +30,8 @@ def app_icon_path() -> Path:
     return APP_ROOT / "assets" / "markdown-converter-icon.png"
 
 
-def header_icon_subsample_factor(source_size: int) -> int:
-    return max(1, source_size // HEADER_ICON_DISPLAY_SIZE)
+def header_icon_path() -> Path:
+    return APP_ROOT / "assets" / "markdown-converter-icon-header.png"
 
 
 def load_tkinter():
@@ -96,14 +96,12 @@ class MarkdownConverterApp:
             self.icon_image = None
 
     def _header_icon(self):
-        icon_path = app_icon_path()
+        icon_path = header_icon_path()
         if not icon_path.is_file():
             return None
 
         try:
-            icon = tk.PhotoImage(file=str(icon_path))
-            factor = header_icon_subsample_factor(icon.width())
-            self.header_icon_image = icon.subsample(factor, factor)
+            self.header_icon_image = tk.PhotoImage(file=str(icon_path))
         except tk.TclError:
             self.header_icon_image = None
         return self.header_icon_image

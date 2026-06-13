@@ -3,8 +3,7 @@ import unittest
 from pathlib import Path
 from PIL import Image
 
-from app.desktop import default_output_path, header_icon_subsample_factor, write_markdown_file
-from app.desktop import app_icon_path
+from app.desktop import HEADER_ICON_DISPLAY_SIZE, app_icon_path, default_output_path, header_icon_path, write_markdown_file
 
 
 class DesktopHelperTests(unittest.TestCase):
@@ -31,8 +30,9 @@ class DesktopHelperTests(unittest.TestCase):
         with Image.open(app_icon_path()) as icon:
             self.assertEqual(icon.size, (4096, 4096))
 
-    def test_header_icon_keeps_64_point_display_size_with_4k_source(self):
-        self.assertEqual(header_icon_subsample_factor(4096), 64)
+    def test_header_icon_uses_pre_rendered_display_size_asset(self):
+        with Image.open(header_icon_path()) as icon:
+            self.assertEqual(icon.size, (HEADER_ICON_DISPLAY_SIZE, HEADER_ICON_DISPLAY_SIZE))
 
 
 if __name__ == "__main__":
