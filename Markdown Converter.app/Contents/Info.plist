@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
   <key>CFBundleExecutable</key>
-  <string>launcher</string>
+  <string>native_launcher</string>
   <key>CFBundleIdentifier</key>
   <string>local.markdown-converter</string>
   <key>CFBundleName</key>
