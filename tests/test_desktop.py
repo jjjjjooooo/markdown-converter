@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+from PIL import Image
 
 from app.desktop import default_output_path, write_markdown_file
 from app.desktop import app_icon_path
@@ -25,6 +26,10 @@ class DesktopHelperTests(unittest.TestCase):
 
         self.assertEqual(icon_path.name, "markdown-converter-icon.png")
         self.assertTrue(icon_path.is_file())
+
+    def test_app_icon_source_is_4k_square(self):
+        with Image.open(app_icon_path()) as icon:
+            self.assertEqual(icon.size, (4096, 4096))
 
 
 if __name__ == "__main__":
