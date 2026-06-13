@@ -15,6 +15,7 @@ SUPPORTED_FILE_TYPES = (
 )
 
 APP_ROOT = Path(__file__).resolve().parent.parent
+HEADER_ICON_DISPLAY_SIZE = 64
 
 
 def default_output_path(source_path: Path) -> Path:
@@ -27,6 +28,10 @@ def write_markdown_file(destination: Path, markdown: str) -> None:
 
 def app_icon_path() -> Path:
     return APP_ROOT / "assets" / "markdown-converter-icon.png"
+
+
+def header_icon_subsample_factor(source_size: int) -> int:
+    return max(1, source_size // HEADER_ICON_DISPLAY_SIZE)
 
 
 def load_tkinter():
@@ -96,7 +101,9 @@ class MarkdownConverterApp:
             return None
 
         try:
-            self.header_icon_image = tk.PhotoImage(file=str(icon_path)).subsample(16, 16)
+            icon = tk.PhotoImage(file=str(icon_path))
+            factor = header_icon_subsample_factor(icon.width())
+            self.header_icon_image = icon.subsample(factor, factor)
         except tk.TclError:
             self.header_icon_image = None
         return self.header_icon_image

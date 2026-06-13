@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 from PIL import Image
 
-from app.desktop import default_output_path, write_markdown_file
+from app.desktop import default_output_path, header_icon_subsample_factor, write_markdown_file
 from app.desktop import app_icon_path
 
 
@@ -30,6 +30,9 @@ class DesktopHelperTests(unittest.TestCase):
     def test_app_icon_source_is_4k_square(self):
         with Image.open(app_icon_path()) as icon:
             self.assertEqual(icon.size, (4096, 4096))
+
+    def test_header_icon_keeps_64_point_display_size_with_4k_source(self):
+        self.assertEqual(header_icon_subsample_factor(4096), 64)
 
 
 if __name__ == "__main__":
