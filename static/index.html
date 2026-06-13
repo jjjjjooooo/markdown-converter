@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown Converter</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Local MarkItDown utility</p>
+          <h1>Markdown Converter</h1>
+        </div>
+        <div class="status-pill" id="statusPill">Ready</div>
+      </header>
+
+      <section class="workbench">
+        <aside class="panel controls-panel">
+          <div class="dropzone" id="dropzone">
+            <input id="fileInput" type="file">
+            <div class="dropzone-icon">MD</div>
+            <h2>Drop a document</h2>
+            <p>PDF, Word, PowerPoint, Excel, HTML, text, and other formats supported by MarkItDown.</p>
+            <button class="secondary-button" id="chooseButton" type="button">Choose file</button>
+          </div>
+
+          <div class="file-meta" id="fileMeta">
+            <span>No file selected</span>
+          </div>
+
+          <button class="primary-button" id="convertButton" type="button" disabled>Convert to Markdown</button>
+          <p class="helper" id="helperText">Conversion runs locally on this machine.</p>
+        </aside>
+
+        <section class="panel preview-panel">
+          <div class="preview-header">
+            <div>
+              <p class="eyebrow">Output</p>
+              <h2 id="previewTitle">Markdown preview</h2>
+            </div>
+            <div class="button-row">
+              <button class="ghost-button" id="copyButton" type="button" disabled>Copy</button>
+              <button class="ghost-button" id="downloadButton" type="button" disabled>Download</button>
+            </div>
+          </div>
+          <pre id="preview" class="preview"><code>Select a file and convert it to see Markdown here.</code></pre>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

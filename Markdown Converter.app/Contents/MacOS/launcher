@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+APP_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+SCRIPT="$APP_ROOT/Start Markdown Converter.command"
+
+/usr/bin/osascript <<APPLESCRIPT
+tell application "Terminal"
+  activate
+  do script quoted form of "$SCRIPT"
+end tell
+APPLESCRIPT
