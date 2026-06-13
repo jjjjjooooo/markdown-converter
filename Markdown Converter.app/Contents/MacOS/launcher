@@ -1,11 +1,18 @@
 #!/bin/zsh
 
 APP_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
-SCRIPT="$APP_ROOT/Start Markdown Converter.command"
+PYTHON="$APP_ROOT/.venv/bin/python"
 
-/usr/bin/osascript <<APPLESCRIPT
-tell application "Terminal"
-  activate
-  do script quoted form of "$SCRIPT"
-end tell
-APPLESCRIPT
+if [ ! -x "$PYTHON" ]; then
+  /usr/bin/osascript -e 'display dialog "Missing .venv. Run Start Markdown Converter.command once after setup." buttons {"OK"} default button "OK" with title "Markdown Converter"'
+  exit 1
+fi
+
+cd "$APP_ROOT" || exit 1
+
+if ! "$PYTHON" -c 'from app.desktop import load_tkinter; load_tkinter()' >/dev/null 2>&1; then
+  /usr/bin/osascript -e 'display dialog "This .venv Python does not include Tkinter. Recreate .venv with a Python build that supports Tkinter, then reinstall requirements." buttons {"OK"} default button "OK" with title "Markdown Converter"'
+  exit 1
+fi
+
+exec "$PYTHON" -m app.desktop

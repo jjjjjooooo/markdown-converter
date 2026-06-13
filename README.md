@@ -1,13 +1,16 @@
 # Markdown Converter
 
-A local split-workbench web app for converting documents to Markdown with Microsoft MarkItDown.
+A local desktop app for converting documents to Markdown with Microsoft MarkItDown.
 
 ## Setup
 
 ```bash
+python3 -c 'import tkinter'
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
+
+Use a Python build with Tkinter support. On macOS, the Python installer from python.org includes Tkinter. If the first setup command fails, install a Tk-capable Python, remove the old `.venv`, and run the setup commands again.
 
 ## Run
 
@@ -23,26 +26,14 @@ or:
 Start Markdown Converter.command
 ```
 
-When using `Start Markdown Converter.command`, leave the Terminal window open while you use the converter. Close that window or press Control-C to stop the server.
-
-To stop a server that is already running on port 8000, double-click:
-
-```text
-Stop Markdown Converter.command
-```
+When using `Start Markdown Converter.command`, the desktop window opens directly. Close the Markdown Converter window to quit.
 
 Command-line option:
 
 ```bash
-.venv/bin/python -m app.server
-```
-
-Then open:
-
-```text
-http://127.0.0.1:8000
+.venv/bin/python -m app.desktop
 ```
 
 ## Use
 
-Drop or choose a supported document, convert it, preview the Markdown, then copy or download the `.md` file.
+Choose a supported document, convert it, preview or edit the Markdown, then copy it or save a `.md` file.

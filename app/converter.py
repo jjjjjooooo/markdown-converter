@@ -1,6 +1,6 @@
 import re
 from pathlib import Path
-from typing import Callable, Optional, Type
+from typing import Callable, Type
 
 
 DEFAULT_MARKITDOWN = object()
@@ -29,7 +29,7 @@ def _load_markitdown_class():
 
 def convert_file_to_markdown(
     path: Path,
-    markitdown_cls: Optional[Type] | object = DEFAULT_MARKITDOWN,
+    markitdown_cls: object = DEFAULT_MARKITDOWN,
     loader: Callable[[], Type] = _load_markitdown_class,
 ) -> str:
     if markitdown_cls is None:
