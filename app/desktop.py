@@ -10,7 +10,7 @@ messagebox = None
 ttk = None
 
 SUPPORTED_FILE_TYPES = (
-    ("Documents", "*.pdf *.docx *.pptx *.xlsx *.xls *.csv *.txt *.html *.htm *.md"),
+    ("Documents and Photos", "*.pdf *.docx *.pptx *.xlsx *.xls *.csv *.txt *.html *.htm *.md *.jpg *.jpeg *.png"),
     ("All files", "*.*"),
 )
 

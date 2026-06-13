@@ -37,4 +37,8 @@ Command-line option:
 
 ## Use
 
-Choose a supported document, convert it, preview or edit the Markdown, then copy it or save a `.md` file.
+Choose a supported document or photo, convert it, preview or edit the Markdown, then copy it or save a `.md` file.
+
+The picker lists `.pdf`, `.docx`, `.pptx`, `.xlsx`, `.xls`, `.csv`, `.txt`, `.html`, `.htm`, `.md`, `.jpg`, `.jpeg`, and `.png`.
+
+Photo conversion currently extracts available image metadata. Rich photo captions require a vision-capable LLM configuration, which this app does not configure yet.
