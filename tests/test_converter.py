@@ -25,6 +25,11 @@ class LoaderBackedMarkItDown:
         return FakeMarkItDown()
 
 
+class EmptyMarkItDown:
+    def convert(self, path):
+        return FakeResult("")
+
+
 class ConverterTests(unittest.TestCase):
     def test_markdown_download_name_replaces_extension_and_unsafe_characters(self):
         self.assertEqual(markdown_download_name("Quarterly deck v1.2.pptx"), "Quarterly-deck-v1-2.md")
@@ -34,6 +39,13 @@ class ConverterTests(unittest.TestCase):
             markdown = convert_file_to_markdown(Path(source.name), markitdown_cls=FakeMarkItDown)
 
         self.assertEqual(markdown, f"converted:{Path(source.name).name}")
+
+    def test_convert_file_to_markdown_falls_back_to_image_reference_for_empty_photo_output(self):
+        with tempfile.NamedTemporaryFile(suffix=".jpg") as source:
+            markdown = convert_file_to_markdown(Path(source.name), markitdown_cls=EmptyMarkItDown)
+
+        self.assertIn(f"![{Path(source.name).stem}]", markdown)
+        self.assertIn(Path(source.name).resolve().as_uri(), markdown)
 
     def test_convert_file_to_markdown_reports_missing_dependency(self):
         with tempfile.NamedTemporaryFile(suffix=".txt") as source:
