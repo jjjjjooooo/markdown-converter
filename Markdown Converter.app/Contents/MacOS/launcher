@@ -11,7 +11,7 @@ fi
 cd "$APP_ROOT" || exit 1
 
 if ! "$PYTHON" -c 'from app.desktop import load_tkinter; load_tkinter()' >/dev/null 2>&1; then
-  /usr/bin/osascript -e 'display dialog "This .venv Python does not include Tkinter. Recreate .venv with a Python build that supports Tkinter, then reinstall requirements." buttons {"OK"} default button "OK" with title "Markdown Converter"'
+  /usr/bin/osascript -e 'display dialog "This .venv Python does not include Tkinter. For Homebrew Python, run: brew install python-tk@3.13. Then recreate .venv with python3.13 and reinstall requirements." buttons {"OK"} default button "OK" with title "Markdown Converter"'
   exit 1
 fi
 

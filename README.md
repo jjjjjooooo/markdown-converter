@@ -5,12 +5,13 @@ A local desktop app for converting documents to Markdown with Microsoft MarkItDo
 ## Setup
 
 ```bash
-python3 -c 'import tkinter'
-python3 -m venv .venv
+brew install python-tk@3.13
+python3.13 -c 'import tkinter'
+python3.13 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
-Use a Python build with Tkinter support. On macOS, the Python installer from python.org includes Tkinter. If the first setup command fails, install a Tk-capable Python, remove the old `.venv`, and run the setup commands again.
+Use Python 3.10 or newer with Tkinter support. MarkItDown requires Python 3.10+, and on Homebrew Python the Tkinter extension is installed separately with `python-tk@3.13`. If the Tkinter check fails, install a Tk-capable Python, remove the old `.venv`, and run the setup commands again.
 
 ## Run
 
