@@ -8,6 +8,8 @@
   <string>local.markdown-converter</string>
   <key>CFBundleName</key>
   <string>Markdown Converter</string>
+  <key>CFBundleIconFile</key>
+  <string>MarkdownConverter</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleVersion</key>

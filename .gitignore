@@ -5,3 +5,4 @@ __pycache__/
 .superpowers/
 logs/
 .server.pid
+build/
