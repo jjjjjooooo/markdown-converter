@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from app.desktop import default_output_path, write_markdown_file
+from app.desktop import app_icon_path
 
 
 class DesktopHelperTests(unittest.TestCase):
@@ -18,6 +19,12 @@ class DesktopHelperTests(unittest.TestCase):
             write_markdown_file(destination, "# Title\n\nConverted text.")
 
             self.assertEqual(destination.read_text(encoding="utf-8"), "# Title\n\nConverted text.")
+
+    def test_app_icon_path_points_to_png_asset(self):
+        icon_path = app_icon_path()
+
+        self.assertEqual(icon_path.name, "markdown-converter-icon.png")
+        self.assertTrue(icon_path.is_file())
 
 
 if __name__ == "__main__":

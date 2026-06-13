@@ -14,6 +14,8 @@ SUPPORTED_FILE_TYPES = (
     ("All files", "*.*"),
 )
 
+APP_ROOT = Path(__file__).resolve().parent.parent
+
 
 def default_output_path(source_path: Path) -> Path:
     return source_path.with_name(markdown_download_name(source_path.name))
@@ -21,6 +23,10 @@ def default_output_path(source_path: Path) -> Path:
 
 def write_markdown_file(destination: Path, markdown: str) -> None:
     destination.write_text(markdown, encoding="utf-8")
+
+
+def app_icon_path() -> Path:
+    return APP_ROOT / "assets" / "markdown-converter-icon.png"
 
 
 def load_tkinter():
@@ -64,6 +70,7 @@ class MarkdownConverterApp:
         self.root.title("Markdown Converter")
         self.root.geometry("980x680")
         self.root.minsize(760, 520)
+        self._set_window_icon()
 
         style = ttk.Style()
         if "aqua" in style.theme_names():
@@ -71,6 +78,28 @@ class MarkdownConverterApp:
         style.configure("Primary.TButton", padding=(14, 8))
         style.configure("Toolbar.TButton", padding=(10, 7))
         style.configure("Status.TLabel", foreground="#52606d")
+
+    def _set_window_icon(self) -> None:
+        icon_path = app_icon_path()
+        if not icon_path.is_file():
+            return
+
+        try:
+            self.icon_image = tk.PhotoImage(file=str(icon_path))
+            self.root.iconphoto(True, self.icon_image)
+        except tk.TclError:
+            self.icon_image = None
+
+    def _header_icon(self):
+        icon_path = app_icon_path()
+        if not icon_path.is_file():
+            return None
+
+        try:
+            self.header_icon_image = tk.PhotoImage(file=str(icon_path)).subsample(16, 16)
+        except tk.TclError:
+            self.header_icon_image = None
+        return self.header_icon_image
 
     def _build_ui(self) -> None:
         container = ttk.Frame(self.root, padding=20)
@@ -81,8 +110,16 @@ class MarkdownConverterApp:
         container.columnconfigure(0, weight=1)
         container.rowconfigure(2, weight=1)
 
-        title = ttk.Label(container, text="Markdown Converter", font=("Helvetica Neue", 22, "bold"))
-        title.grid(row=0, column=0, sticky="w")
+        title_bar = ttk.Frame(container)
+        title_bar.grid(row=0, column=0, sticky="w")
+
+        header_icon = self._header_icon()
+        if header_icon is not None:
+            icon_label = ttk.Label(title_bar, image=header_icon)
+            icon_label.grid(row=0, column=0, sticky="w", padx=(0, 12))
+
+        title = ttk.Label(title_bar, text="Markdown Converter", font=("Helvetica Neue", 22, "bold"))
+        title.grid(row=0, column=1, sticky="w")
 
         file_bar = ttk.Frame(container)
         file_bar.grid(row=1, column=0, sticky="ew", pady=(16, 12))
